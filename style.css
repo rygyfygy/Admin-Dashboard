@@ -39,7 +39,6 @@ nav {
   justify-content: space-around;
 }
 
-
 .logo {
   font-size: xx-large;
   display: flex;
@@ -54,11 +53,11 @@ nav {
 }
 
 span {
-    display: flex;
-    align-items: center;
-    justify-content: baseline;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  margin: 0;
+  padding: 0;
 }
 
 span > img {
@@ -71,57 +70,178 @@ span > img {
 }
 
 .main {
-  height: 80svh;
-  display: flex;
+  display: grid;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-basis: 50px;
   background-color: #e3e8f0;
   z-index: 1;
+  padding: 40px;
+  grid-template-columns: 3fr 1fr;
+  overflow: hidden;
+  position: relative;
+
+  grid-template-areas:
+    "projects announcements"
+    "projects trending";
+}
+
+.main > .projects {
+  grid-row-end: span 2;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  min-height: 0;
+  max-height: fit-content;
+}
+
+.projects > div {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 250px;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  padding-top: 10px;
+  box-shadow: 0px 0px 10px 1px rgb(185, 185, 185);
+
+}
+
+.main > .announcements {
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .top {
-  height: 20svh;
   display: grid;
   z-index: 2;
   box-shadow: 0px 0px 10px #878787;
   grid-template: 1fr 1fr / 1fr 1fr;
 }
 
-.top>div {
+/* .top>div {
     border: 2px solid black;
-}
+} */
 
 .search-container {
- padding: 1.5rem;
- padding-left: 3rem;
+  display: flex;
+
+  padding: 1.5rem;
+  padding-left: 3rem;
 }
-.search-container>form {
-    display: flex;
-    justify-content: baseline;
-    align-items: center;
-    gap: 10px
+.search-container > form {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 10px;
 }
 
 form button {
-    
-        background-color: white;
-        color: white;
-        border: 0px;
+  background-color: white;
+  color: white;
+  border: 0px;
+  width: 1.4rem;
+  height: auto;
+}
 
-
-    & img {
-        width: 1.4rem;
-        height: auto;
-        vertical-align: text-bottom;
-
-    }
-
+form button img {
+  width: 1.4rem;
+  height: auto;
+  vertical-align: text-bottom;
 }
 
 #search {
-    background-color:#eaeaea;
-    border: 0px;
-    border-radius: 20px;
-    width: 10rem;
-    flex-grow: 1;
-    height: 25px;
+  background-color: #eaeaea;
+  border: 0px;
+  border-radius: 20px;
+  width: 40rem;
+  height: 27px;
 
+  flex-grow: 1;
+}
+
+.profile {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
+  padding-right: 100px;
+}
+
+.profile img {
+  width: 30px;
+}
+
+.profile .profile-picture {
+  height: 50px;
+  width: auto;
+  border-radius: 100px;
+}
+
+.profile .username {
+  font-size: large;
+  font-weight: bolder;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7%;
+}
+
+.actions > button {
+  font-size: large;
+  font-weight: bold;
+  line-height: 0px;
+  vertical-align: middle;
+  border: 0;
+  padding: 20px;
+  background-color: #4391d2;
+  color: white;
+  border-radius: 200px;
+  width: 8rem;
+}
+
+.welcome {
+  display: grid;
+  grid-template-areas:
+    "profile_pic hi_there"
+    "profile_pic username";
+  grid-template-rows: 20px 60px;
+  grid-column-gap: 20px;
+  grid-row-gap: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  justify-content: flex-start;
+}
+
+#profile_pic {
+  grid-area: "profile_pic";
+  height: 70px;
+  justify-self: flex-start;
+  align-self: center;
+  border-radius: 200px;
+  grid-row: span 2;
+}
+#hi_there {
+  font-size: small;
+  grid-area: "hi_there";
+  font-weight: 600;
+  align-self: flex-start;
+}
+#username {
+  grid-area: "username";
+  font-weight: 700;
+  font-size: x-large;
+  align-self: center;
 }
