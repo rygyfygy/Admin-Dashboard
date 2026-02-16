@@ -19,8 +19,9 @@ body {
 
 .layout {
   display: grid;
-  grid-template: 1fr 4fr / 1fr 5fr;
-  height: 100%;
+  grid-template: 1fr 5fr / 1fr 5fr;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 nav {
@@ -32,7 +33,6 @@ nav {
   background-color: rgb(67, 145, 210);
   font-weight: bold;
   padding: 30px;
-  padding-bottom: 300px;
   grid-row: 1/3;
   z-index: 3;
   font-size: 20px;
@@ -71,43 +71,55 @@ span > img {
 
 .main {
   display: grid;
-  gap: 10px;
-  flex-wrap: wrap;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-basis: 50px;
+  row-gap: 0.3rem;
   background-color: #e3e8f0;
-  z-index: 1;
-  padding: 40px;
-  grid-template-columns: 3fr 1fr;
-  overflow: hidden;
-  position: relative;
+  z-index: 0;
+  padding: 0.5rem 4rem;
+  padding-left: 1rem;
+  align-items: flex-start;
+  justify-content: space-around;
+  grid-template-columns: 5fr 2fr;
 
   grid-template-areas:
     "projects announcements"
     "projects trending";
+  min-height: 0;
+  overflow: auto;
+}
+/* MAIN COINTAINERS */
+.main > div:has(.projects) {
+  grid-area: projects;
+  display: flex;
+  flex-direction: column;
+  >h2 {
+    padding-left: 3.7rem;
+  }
+}
+.main > div:has(.announcements) {
+  grid-area: announcements;
+}
+.main > div:has(.trending) {
+  grid-area: trending;
 }
 
-.main > .projects {
+.projects {
   grid-row-end: span 2;
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 1.4rem;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: flex-start;
-  min-height: 0;
-  max-height: fit-content;
+  justify-content: center;
+  min-height: 20rem;
 }
 
 .projects > div {
-  flex: 1 1 calc(50% - 10px);
-  min-width: 250px;
+  flex: 1 1 50%;
+  min-width: 10rem;
   max-width: 400px;
   background-color: white;
   border-radius: 10px;
-  padding: 30px;
-  padding-top: 10px;
+  padding: 2rem;
+  padding-top: 0.5rem;
   box-shadow: 0px 0px 10px 1px rgb(185, 185, 185);
 }
 
@@ -117,8 +129,7 @@ span > img {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 1px rgb(185, 185, 185);
-  padding: 30px;
-  max-height: 500px;
+  padding: 0.5rem 2rem;
 
   > :not(:first-child, :last-child) {
     border-top: 1px solid gray;
@@ -131,6 +142,7 @@ span > img {
     justify-content: center;
 
     > p {
+      margin-top: 0.5rem;
       font-size: small;
     }
     h4 {
@@ -146,15 +158,40 @@ span > img {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 1px rgb(185, 185, 185);
-  padding: 30px;
+  padding: 1rem 2rem 1rem 2rem;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+.trending p {
+  font-size: small;
+  margin-top: 0.5rem;
+}
+
+.trending :first-child>h5 {
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
+.trending :not(:first-child)>h5 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.flower {
+  height: 3rem;
+  width: 3rem;
+  object-fit: fill;
+  border-radius: 100px;
+  align-self: self-start;
 }
 
 .top {
   display: grid;
   z-index: 2;
   box-shadow: 0px 0px 10px #878787;
-  grid-template: 2fr 1fr / 2fr 1fr;
-  max-height: 190px;
+  grid-template: 1fr 1fr / 2fr 1fr;
+  max-height: 10rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 /* .top>div {
@@ -163,15 +200,16 @@ span > img {
 
 .search-container {
   display: flex;
-
-  padding: 1.5rem;
+  padding: 1rem;
   padding-left: 3rem;
 }
 .search-container > form {
   display: flex;
   justify-content: baseline;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 form button {
@@ -193,8 +231,7 @@ form button img {
   border: 0px;
   border-radius: 20px;
   width: 40rem;
-  height: 27px;
-
+  height: 1.4rem;
   flex-grow: 1;
 }
 
@@ -212,7 +249,7 @@ form button img {
 }
 
 .profile .profile-picture {
-  height: 50px;
+  height: 3rem;
   width: auto;
   border-radius: 100px;
 }
@@ -229,7 +266,7 @@ form button img {
   gap: 7%;
 }
 
-.actions > button {
+.actions>button {
   font-size: large;
   font-weight: bold;
   line-height: 0px;
@@ -247,19 +284,16 @@ form button img {
   grid-template-areas:
     "profile_pic hi_there"
     "profile_pic username";
-  grid-template-rows: 20px 60px;
-  grid-column-gap: 20px;
+  grid-template-rows: 1.5rem 3rem;
+  grid-column-gap: 30px;
   grid-row-gap: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 0 1rem 0 2rem;
   justify-content: flex-start;
 }
 
 #profile_pic {
   grid-area: "profile_pic";
-  height: 70px;
+  height: 4rem;
   justify-self: flex-start;
   align-self: center;
   border-radius: 200px;
@@ -277,3 +311,4 @@ form button img {
   font-size: x-large;
   align-self: center;
 }
+
